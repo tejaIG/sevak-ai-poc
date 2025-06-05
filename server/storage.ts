@@ -1,4 +1,7 @@
 import { users, requirements, type User, type InsertUser, type Requirements, type InsertRequirements } from "@shared/schema";
+import { drizzle } from "drizzle-orm/neon-http";
+import { neon } from "@neondatabase/serverless";
+import { eq } from "drizzle-orm";
 
 export interface IStorage {
   // User operations
@@ -17,82 +20,52 @@ export interface IStorage {
   getUserWithRequirements(userId: number): Promise<{ user: User; requirements?: Requirements } | undefined>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private requirements: Map<number, Requirements>;
-  private currentUserId: number;
-  private currentRequirementsId: number;
+const sql = neon(process.env.DATABASE_URL!);
+const db = drizzle(sql);
 
-  constructor() {
-    this.users = new Map();
-    this.requirements = new Map();
-    this.currentUserId = 1;
-    this.currentRequirementsId = 1;
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const result = await db.select().from(users).where(eq(users.id, id)).limit(1);
+    return result[0];
   }
 
   async getUserByEmail(email: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(user => user.email === email);
+    const result = await db.select().from(users).where(eq(users.email, email)).limit(1);
+    return result[0];
   }
 
   async getUserByMobile(mobile: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(user => user.mobile === mobile);
+    const result = await db.select().from(users).where(eq(users.mobile, mobile)).limit(1);
+    return result[0];
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentUserId++;
-    const user: User = { 
-      ...insertUser, 
-      id,
-      createdAt: new Date()
-    };
-    this.users.set(id, user);
-    return user;
+    const result = await db.insert(users).values(insertUser).returning();
+    return result[0];
   }
 
   async updateUser(id: number, updates: Partial<InsertUser>): Promise<User | undefined> {
-    const user = this.users.get(id);
-    if (!user) return undefined;
-    
-    const updatedUser = { ...user, ...updates };
-    this.users.set(id, updatedUser);
-    return updatedUser;
+    const result = await db.update(users).set(updates).where(eq(users.id, id)).returning();
+    return result[0];
   }
 
   async getRequirements(userId: number): Promise<Requirements | undefined> {
-    return Array.from(this.requirements.values()).find(req => req.userId === userId);
+    const result = await db.select().from(requirements).where(eq(requirements.userId, userId)).limit(1);
+    return result[0];
   }
 
   async createRequirements(insertRequirements: InsertRequirements): Promise<Requirements> {
-    const id = this.currentRequirementsId++;
-    const requirements: Requirements = {
-      ...insertRequirements,
-      id,
-      createdAt: new Date(),
-      updatedAt: new Date()
-    };
-    this.requirements.set(id, requirements);
-    return requirements;
+    const result = await db.insert(requirements).values(insertRequirements).returning();
+    return result[0];
   }
 
   async updateRequirements(userId: number, updates: Partial<InsertRequirements>): Promise<Requirements | undefined> {
-    const existing = Array.from(this.requirements.values()).find(req => req.userId === userId);
-    if (!existing) return undefined;
-
-    const updated = {
-      ...existing,
-      ...updates,
-      updatedAt: new Date()
-    };
-    this.requirements.set(existing.id, updated);
-    return updated;
+    const result = await db.update(requirements).set(updates).where(eq(requirements.userId, userId)).returning();
+    return result[0];
   }
 
   async getUserWithRequirements(userId: number): Promise<{ user: User; requirements?: Requirements } | undefined> {
-    const user = this.users.get(userId);
+    const user = await this.getUser(userId);
     if (!user) return undefined;
 
     const userRequirements = await this.getRequirements(userId);
@@ -100,4 +73,4 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
