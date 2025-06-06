@@ -1,6 +1,6 @@
 import { users, requirements, type User, type InsertUser, type Requirements, type InsertRequirements } from "@shared/schema";
-import { drizzle } from "drizzle-orm/neon-http";
-import { neon } from "@neondatabase/serverless";
+import { drizzle } from "drizzle-orm/postgres-js";
+import postgres from "postgres";
 import { eq } from "drizzle-orm";
 
 export interface IStorage {
@@ -20,8 +20,10 @@ export interface IStorage {
   getUserWithRequirements(userId: number): Promise<{ user: User; requirements?: Requirements } | undefined>;
 }
 
-const sql = neon(process.env.DATABASE_URL!);
-const db = drizzle(sql);
+// Initialize Supabase PostgreSQL connection
+const connectionString = process.env.DATABASE_URL!;
+const client = postgres(connectionString);
+const db = drizzle(client);
 
 export class DatabaseStorage implements IStorage {
   async getUser(id: number): Promise<User | undefined> {
