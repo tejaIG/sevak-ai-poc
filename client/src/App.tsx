@@ -1,9 +1,9 @@
+import React, { useEffect, useState } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { useEffect, useState } from "react";
 import { supabase } from "./lib/supabase";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -21,19 +21,24 @@ function Router() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log("Router useEffect: Setting up authentication...");
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
+      console.log("Initial session:", session?.user ? "User found" : "No user");
       setUser(session?.user ?? null);
       setLoading(false);
     });
 
     // Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      console.log("Auth state change:", session?.user ? "User logged in" : "User logged out");
       setUser(session?.user ?? null);
     });
 
     return () => subscription.unsubscribe();
   }, []);
+
+  console.log("Router render: loading =", loading, "user =", user ? "authenticated" : "not authenticated");
 
   if (loading) {
     return (
@@ -80,11 +85,14 @@ function Router() {
 }
 
 function App() {
+  console.log("App component rendered");
   return (
-    <div style={{ padding: '20px', backgroundColor: 'lightblue' }}>
-      <h1>Hello SevakAI!</h1>
-      <p>React is working!</p>
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Router />
+        <Toaster />
+      </TooltipProvider>
+    </QueryClientProvider>
   );
 }
 
