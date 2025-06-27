@@ -1,94 +1,165 @@
 /** @jsxImportSource react */
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Facebook, Twitter, Instagram, Linkedin, MapPin, Phone, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 export function Footer() {
+  const openWhatsApp = () => {
+    const message = "Hi! I'm interested in SevakAI's services. Can you help me?";
+    const whatsappUrl = `https://wa.me/919876543210?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
-    <footer className="bg-gradient-to-r from-blue-900 to-blue-800 text-white">
+    <footer className="bg-gradient-to-r from-slate-900 to-slate-800 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Left Section - Brand */}
+          {/* Brand Section */}
           <div className="lg:col-span-1">
-                         <div className="flex items-center space-x-3 mb-4">
-               <img 
-                 src="/logos/logo90x90.png" 
-                 alt="Sevak AI Logo" 
-                 className="w-8 h-8 rounded-lg object-contain"
-               />
+            <div className="flex items-center space-x-3 mb-4">
+              <img 
+                src="/logos/sevak-logo.svg" 
+                alt="SevakAI Logo" 
+                className="w-8 h-8 rounded-lg object-contain"
+              />
               <div>
-                <h3 className="font-bold text-lg">Sevak AI 🙌</h3>
-                <p className="text-xs text-blue-200">powered by MetaNova AI</p>
+                <h3 className="font-bold text-lg">SevakAI</h3>
+                <p className="text-xs text-slate-300">AI-Powered Help Hiring</p>
               </div>
             </div>
-            <p className="text-sm text-blue-100 mb-6 leading-relaxed">
-              India's smartest way to hire trusted helpers. Empowering homes and workers with 
-              AI-powered verification and multilingual support.
+            <p className="text-sm text-slate-300 mb-6 leading-relaxed">
+              Hire trusted maids, cooks, drivers & nannies without the guesswork. 
+              Verified, voice-onboarded helpers using AI, not WhatsApp groups.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <a href="#" className="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors">
                 <Facebook className="h-4 w-4" />
               </a>
-              <a href="#" className="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <a href="#" className="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors">
                 <Twitter className="h-4 w-4" />
               </a>
-              <a href="#" className="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <a href="#" className="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors">
                 <Instagram className="h-4 w-4" />
               </a>
-              <a href="#" className="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+              <a href="#" className="w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors">
                 <Linkedin className="h-4 w-4" />
               </a>
             </div>
           </div>
 
-          {/* Middle Section - Sevak Categories */}
+          {/* Quick Links */}
           <div>
-            <h4 className="font-bold text-orange-400 mb-4">Sevak Categories</h4>
+            <h4 className="font-bold text-orange-400 mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-blue-100 hover:text-white transition-colors">Maids & Housekeeping</a></li>
-              <li><a href="#" className="text-blue-100 hover:text-white transition-colors">Cooks & Chefs</a></li>
-              <li><a href="#" className="text-blue-100 hover:text-white transition-colors">Nannies & Childcare</a></li>
-              <li><a href="#" className="text-blue-100 hover:text-white transition-colors">Drivers</a></li>
-              <li><a href="#" className="text-blue-100 hover:text-white transition-colors">Elderly Care</a></li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('home')}
+                  className="text-slate-300 hover:text-white transition-colors text-left"
+                >
+                  Home
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('how-it-works')}
+                  className="text-slate-300 hover:text-white transition-colors text-left"
+                >
+                  How It Works
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('pricing')}
+                  className="text-slate-300 hover:text-white transition-colors text-left"
+                >
+                  Pricing
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('testimonials')}
+                  className="text-slate-300 hover:text-white transition-colors text-left"
+                >
+                  Testimonials
+                </button>
+              </li>
+              <li>
+                <button 
+                  onClick={() => scrollToSection('join-beta')}
+                  className="text-slate-300 hover:text-white transition-colors text-left"
+                >
+                  Join Beta
+                </button>
+              </li>
             </ul>
           </div>
 
-          {/* Right Section - Support */}
+          {/* Services */}
           <div>
-            <h4 className="font-bold text-orange-400 mb-4">Support</h4>
+            <h4 className="font-bold text-orange-400 mb-4">Our Services</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-blue-100 hover:text-white transition-colors">Help Center</a></li>
-              <li><a href="#" className="text-blue-100 hover:text-white transition-colors">AI Verification Process</a></li>
-              <li><a href="#" className="text-blue-100 hover:text-white transition-colors">Contact Us</a></li>
-              <li><a href="#" className="text-blue-100 hover:text-white transition-colors">Background Checks</a></li>
-              <li><a href="#" className="text-blue-100 hover:text-white transition-colors">Women Empowerment</a></li>
+              <li><span className="text-slate-300">🏠 Maids & Housekeepers</span></li>
+              <li><span className="text-slate-300">👨‍🍳 Cooks & Chefs</span></li>
+              <li><span className="text-slate-300">👶 Nannies & Babysitters</span></li>
+              <li><span className="text-slate-300">🚗 Drivers</span></li>
+              <li><span className="text-slate-300">❤️ Elderly Care</span></li>
             </ul>
           </div>
 
-          {/* Stay Connected */}
+          {/* Contact Info */}
           <div>
-            <h4 className="font-bold text-orange-400 mb-4">Stay Connected</h4>
-            <p className="text-sm text-blue-100 mb-4">
-              Get updates on verified sevaks and AI-powered matching in your area.
-            </p>
-            <div className="flex space-x-2">
-              <Input 
-                placeholder="Enter your mobile number"
-                className="bg-blue-800 border-blue-700 text-white placeholder-blue-300 flex-1"
-              />
-              <Button className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg font-medium">
-                Subscribe
+            <h4 className="font-bold text-orange-400 mb-4">Contact Us</h4>
+            <div className="space-y-3 text-sm">
+              <div className="flex items-center space-x-2">
+                <MapPin className="h-4 w-4 text-orange-400" />
+                <span className="text-slate-300">Hyderabad, India</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Phone className="h-4 w-4 text-orange-400" />
+                <span className="text-slate-300">+91 98765 43210</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Mail className="h-4 w-4 text-orange-400" />
+                <span className="text-slate-300">hello@sevakai.com</span>
+              </div>
+            </div>
+            
+            <div className="mt-6">
+              <Button 
+                onClick={openWhatsApp}
+                className="bg-green-500 hover:bg-green-600 text-white w-full rounded-lg"
+              >
+                Chat on WhatsApp
               </Button>
             </div>
           </div>
         </div>
         
         {/* Bottom Bar */}
-        <div className="border-t border-blue-700 mt-8 pt-6">
-          <div className="text-center">
-            <p className="text-sm text-blue-200">
-              © 2024 Sevak AI powered by MetaNova AI. Empowering women & skilled workers across India. All rights reserved.
+        <div className="border-t border-slate-700 mt-8 pt-6">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <p className="text-sm text-slate-400 mb-4 md:mb-0">
+              © 2024 SevakAI. Built for fairness. Powered by AI. Trusted by families.
             </p>
+            <div className="flex space-x-6 text-sm">
+              <a href="#" className="text-slate-400 hover:text-white transition-colors">Privacy Policy</a>
+              <a href="#" className="text-slate-400 hover:text-white transition-colors">Terms of Service</a>
+              <a href="#" className="text-slate-400 hover:text-white transition-colors">Help Center</a>
+            </div>
+          </div>
+          
+          {/* Location Badge */}
+          <div className="mt-4 text-center">
+            <div className="inline-flex items-center bg-green-900 text-green-300 px-4 py-2 rounded-full text-sm">
+              <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+              🟢 Now in Hyderabad | Expanding to Bengaluru, Chennai, and Dubai
+            </div>
           </div>
         </div>
       </div>
