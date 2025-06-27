@@ -1,3 +1,4 @@
+/** @jsxImportSource react */
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "wouter";
 import { queryClient } from "./lib/queryClient";
@@ -7,6 +8,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { supabase } from "./lib/supabase";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import Landing from "@/pages/landing";
 import Registration from "@/pages/registration";
 import Requirements from "@/pages/requirements";
 import Preferences from "@/pages/preferences";
@@ -23,14 +25,14 @@ function Router() {
   useEffect(() => {
     console.log("Router useEffect: Setting up authentication...");
     // Get initial session
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    supabase.auth.getSession().then(({ data: { session } }: any) => {
       console.log("Initial session:", session?.user ? "User found" : "No user");
       setUser(session?.user ?? null);
       setLoading(false);
     });
 
     // Listen for auth changes
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
       console.log("Auth state change:", session?.user ? "User logged in" : "User logged out");
       setUser(session?.user ?? null);
     });
@@ -44,9 +46,16 @@ function Router() {
     return (
       <div className="min-h-screen bg-slate-50 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent mb-4">
-            SevakAI 🙌
-          </h1>
+          <div className="flex items-center justify-center mb-4">
+            <img 
+              src="/logos/logo90x90.png" 
+              alt="Sevak AI Logo" 
+              className="w-12 h-12 rounded-lg mr-3 object-contain"
+            />
+            <h1 className="text-4xl font-bold text-slate-900">
+              SevakAI 🙌
+            </h1>
+          </div>
           <p className="text-slate-600">Loading...</p>
         </div>
       </div>
@@ -62,8 +71,13 @@ function Router() {
         <Route path="/signup" component={Signup} />
         <Route path="/coming-soon" component={ComingSoon} />
         
-        {/* Protected routes - redirect to login if not authenticated */}
+        {/* Home route - Landing page for non-authenticated, Registration for authenticated */}
         <Route path="/">
+          {user ? <Registration /> : <Landing />}
+        </Route>
+        
+        {/* Protected routes - redirect to login if not authenticated */}
+        <Route path="/registration">
           {user ? <Registration /> : <Login />}
         </Route>
         <Route path="/requirements">

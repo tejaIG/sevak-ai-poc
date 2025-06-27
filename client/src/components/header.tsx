@@ -1,6 +1,7 @@
+/** @jsxImportSource react */
 import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
-import { LogOut, User, Menu, X } from "lucide-react";
+import { LogOut, User, Menu, X, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { supabase, signOut, getCurrentUser } from "@/lib/supabase";
 import { useToast } from "@/hooks/use-toast";
@@ -14,7 +15,7 @@ export function Header() {
   useEffect(() => {
     getCurrentUser().then(setUser);
     
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
       setUser(session?.user ?? null);
     });
 
@@ -39,35 +40,59 @@ export function Header() {
   };
 
   return (
-    <header className="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <header className="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo and Brand */}
-          <div className="flex items-center">
+          {/* Logo and Location */}
+          <div className="flex items-center space-x-6">
             <button
               onClick={() => setLocation("/")}
-              className="flex items-center space-x-2"
+              className="flex items-center space-x-3"
             >
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-                SevakAI 🙌
-              </h1>
+              <img 
+                src="/logos/logo90x90.png" 
+                alt="Sevak AI Logo" 
+                className="w-8 h-8 rounded-lg object-contain"
+              />
+              <div>
+                <h1 className="text-xl font-bold text-slate-900">Sevak AI</h1>
+                <p className="text-xs text-slate-500">powered by MetaNova AI</p>
+              </div>
             </button>
-            <div className="hidden md:block ml-4">
-              <span className="text-sm text-slate-500">India's smartest way to hire trusted helpers</span>
+            
+            {/* Location Indicator */}
+            <div className="hidden md:flex items-center space-x-1 text-slate-600">
+              <MapPin className="h-4 w-4" />
+              <span className="text-sm font-medium">Mumbai, India</span>
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex items-center space-x-6">
+            <Button
+              variant="ghost"
+              onClick={() => setLocation("/coming-soon")}
+              className="text-slate-700 hover:text-slate-900 font-medium"
+            >
+              Find Sevaks
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => setLocation("/coming-soon")}
+              className="text-slate-700 hover:text-slate-900 font-medium"
+            >
+              Become a Sevak
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={() => setLocation("/coming-soon")}
+              className="text-slate-700 hover:text-slate-900 font-medium"
+            >
+              For Families
+            </Button>
+            
             {user ? (
               <>
-                <Button
-                  variant="ghost"
-                  onClick={() => setLocation("/coming-soon")}
-                  className="text-slate-600 hover:text-slate-900"
-                >
-                  AI Features
-                </Button>
                 <div className="flex items-center space-x-2 text-sm text-slate-600">
                   <User className="h-4 w-4" />
                   <span>{user.email}</span>
@@ -85,23 +110,17 @@ export function Header() {
               <>
                 <Button
                   variant="ghost"
-                  onClick={() => setLocation("/coming-soon")}
-                  className="text-slate-600 hover:text-slate-900"
-                >
-                  AI Features
-                </Button>
-                <Button
-                  variant="ghost"
                   onClick={() => setLocation("/login")}
-                  className="text-slate-600 hover:text-slate-900"
+                  className="text-slate-700 hover:text-slate-900 font-medium flex items-center space-x-1"
                 >
-                  Sign In
+                  <User className="h-4 w-4" />
+                  <span>Log in</span>
                 </Button>
                 <Button
                   onClick={() => setLocation("/signup")}
-                  className="bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700"
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg shadow-md font-medium"
                 >
-                  Get Started
+                  Sign up
                 </Button>
               </>
             )}
@@ -123,6 +142,12 @@ export function Header() {
         {isMenuOpen && (
           <div className="md:hidden border-t border-slate-200 py-4">
             <div className="space-y-2">
+              {/* Mobile Location */}
+              <div className="flex items-center space-x-1 text-slate-600 px-3 py-2">
+                <MapPin className="h-4 w-4" />
+                <span className="text-sm font-medium">Mumbai, India</span>
+              </div>
+              
               <Button
                 variant="ghost"
                 onClick={() => {
@@ -131,8 +156,29 @@ export function Header() {
                 }}
                 className="w-full text-left justify-start"
               >
-                AI Features
+                Find Sevaks
               </Button>
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  setLocation("/coming-soon");
+                  setIsMenuOpen(false);
+                }}
+                className="w-full text-left justify-start"
+              >
+                Become a Sevak
+              </Button>
+              <Button
+                variant="ghost"
+                onClick={() => {
+                  setLocation("/coming-soon");
+                  setIsMenuOpen(false);
+                }}
+                className="w-full text-left justify-start"
+              >
+                For Families
+              </Button>
+              
               {user ? (
                 <>
                   <div className="px-3 py-2 text-sm text-slate-600">
@@ -155,18 +201,19 @@ export function Header() {
                       setLocation("/login");
                       setIsMenuOpen(false);
                     }}
-                    className="w-full text-left justify-start"
+                    className="w-full text-left justify-start flex items-center space-x-2"
                   >
-                    Sign In
+                    <User className="h-4 w-4" />
+                    <span>Log in</span>
                   </Button>
                   <Button
                     onClick={() => {
                       setLocation("/signup");
                       setIsMenuOpen(false);
                     }}
-                    className="w-full bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700"
+                    className="w-full bg-orange-500 hover:bg-orange-600 text-white"
                   >
-                    Get Started
+                    Sign up
                   </Button>
                 </>
               )}
