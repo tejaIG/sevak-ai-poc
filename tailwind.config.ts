@@ -11,6 +11,31 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        // Custom Sevak AI colors
+        peach: {
+          50: "#fef7f0",
+          100: "#fce7d6",
+          200: "#f8d2b3",
+          300: "#f4bd90",
+          400: "#f0a86e",
+          500: "#ec934b",
+          600: "#e8712d",
+          700: "#d4520f",
+          800: "#a84010",
+          900: "#7c300c"
+        },
+        orange: {
+          50: "#fef7f0",
+          100: "#fce7d6",
+          200: "#f8d2b3",
+          300: "#f4bd90",
+          400: "#f0a86e",
+          500: "#FF6B35",
+          600: "#e8712d",
+          700: "#d4520f",
+          800: "#a84010",
+          900: "#7c300c"
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
