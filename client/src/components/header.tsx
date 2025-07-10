@@ -64,9 +64,10 @@ export function Header() {
               className="flex items-center space-x-3"
             >
               <img 
-                src="/logos/sevak-logo.svg" 
+                src="/logos/logo90x90.png" 
                 alt="SevakAI Logo" 
                 className="w-8 h-8 rounded-lg object-contain"
+                style={{ width: '32px', height: '32px', objectFit: 'contain' }}
               />
               <div>
                 <h1 className="text-xl font-bold text-slate-900">SevakAI</h1>

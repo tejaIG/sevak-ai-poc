@@ -24,9 +24,10 @@ export function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-4">
               <img 
-                src="/logos/sevak-logo.svg" 
+                src="/logos/logo90x90.png" 
                 alt="SevakAI Logo" 
                 className="w-8 h-8 rounded-lg object-contain"
+                style={{ width: '32px', height: '32px', objectFit: 'contain' }}
               />
               <div>
                 <h3 className="font-bold text-lg">SevakAI</h3>

@@ -60,7 +60,7 @@ const featuredSevaks = [
     skills: ["Cooking", "North Indian"],
     tasksCompleted: 520,
     avatar: null,
-    image: "/api/placeholder/64/64"
+    image: "/logos/logo90x90.png"
   },
   {
     id: 3,
@@ -72,7 +72,7 @@ const featuredSevaks = [
     skills: ["Childcare", "Baby Sitting"],
     tasksCompleted: 280,
     avatar: null,
-    image: "/api/placeholder/64/64"
+    image: "/logos/logo90x90.png"
   },
   {
     id: 4,
@@ -84,7 +84,7 @@ const featuredSevaks = [
     skills: ["Driving", "Car Care"],
     tasksCompleted: 410,
     avatar: null,
-    image: "/api/placeholder/64/64"
+    image: "/logos/logo90x90.png"
   }
 ];
 

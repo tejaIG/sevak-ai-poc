@@ -51,6 +51,7 @@ function Router() {
               src="/logos/logo90x90.png" 
               alt="Sevak AI Logo" 
               className="w-12 h-12 rounded-lg mr-3 object-contain"
+              style={{ width: '48px', height: '48px', objectFit: 'contain' }}
             />
             <h1 className="text-4xl font-bold text-slate-900">
               SevakAI 🙌
