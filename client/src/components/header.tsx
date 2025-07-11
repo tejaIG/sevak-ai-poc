@@ -109,6 +109,12 @@ export function Header() {
               Testimonials
             </button>
             <button
+              onClick={() => scrollToSection('faq')}
+              className="text-slate-700 hover:text-orange-600 font-medium transition-colors"
+            >
+              FAQs
+            </button>
+            <button
               onClick={() => scrollToSection('contact')}
               className="text-slate-700 hover:text-orange-600 font-medium transition-colors"
             >
@@ -117,7 +123,7 @@ export function Header() {
             
             {/* CTA Button */}
             <Button
-              onClick={() => scrollToSection('join-beta')}
+              onClick={() => scrollToSection('app-download')}
               className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg shadow-md font-medium"
             >
               Join Beta
@@ -171,6 +177,12 @@ export function Header() {
                 Testimonials
               </button>
               <button
+                onClick={() => scrollToSection('faq')}
+                className="block w-full text-left px-3 py-2 text-slate-700 hover:bg-slate-50 rounded-lg"
+              >
+                FAQs
+              </button>
+              <button
                 onClick={() => scrollToSection('contact')}
                 className="block w-full text-left px-3 py-2 text-slate-700 hover:bg-slate-50 rounded-lg"
               >
@@ -188,17 +200,6 @@ export function Header() {
             </div>
           </div>
         )}
-      </div>
-
-      {/* Floating WhatsApp Button - Fixed Position */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <Button
-          onClick={openWhatsApp}
-          className="bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg"
-          size="lg"
-        >
-          <Phone className="h-6 w-6" />
-        </Button>
       </div>
     </header>
   );

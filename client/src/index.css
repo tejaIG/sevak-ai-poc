@@ -95,3 +95,19 @@
 .peer[data-state="checked"] ~ .peer-data-\[state\=checked\]\:bg-blue-50 {
   background-color: rgb(239 246 255);
 }
+
+/* Add this to your main CSS file, e.g., index.css */
+.markdown-content ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.markdown-content li {
+  margin-bottom: 4px;
+}
+
+.markdown-content strong {
+  font-weight: 600;
+}

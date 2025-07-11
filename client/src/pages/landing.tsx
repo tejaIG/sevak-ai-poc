@@ -20,13 +20,14 @@ import {
   Clock,
   Award,
   Zap,
-  DollarSign,
+  IndianRupee,
   Download,
   ChevronRight,
   Globe,
   UserCheck,
   Headphones
 } from "lucide-react";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import { useToast } from "@/hooks/use-toast";
 import { 
   trackFormSubmission, 
@@ -191,6 +192,49 @@ const workflowSteps = [
   }
 ];
 
+// ---------------------------------------------
+// FAQ Section Data & Types
+// ---------------------------------------------
+interface FAQItem {
+  id: string;
+  question: string;
+  answer: string;
+  category: string;
+}
+
+const faqData: FAQItem[] = [
+  {
+    id: '1',
+    question: 'How do I find a reliable helper?',
+    answer: 'Use our AI matching feature to find helpers based on your specific needs. All helpers are background verified and have customer reviews.',
+    category: 'Finding Helpers'
+  },
+  {
+    id: '2',
+    question: 'What safety measures are in place?',
+    answer: 'All helpers undergo background verification, police checks, and ID verification. We also provide emergency contact features.',
+    category: 'Safety'
+  },
+  {
+    id: '3',
+    question: 'How does pricing work?',
+    answer: 'Helpers set their hourly rates. You can see the total cost before booking. We offer discounts for regular bookings.',
+    category: 'Pricing'
+  },
+  {
+    id: '4',
+    question: 'Can I cancel a booking?',
+    answer: 'Yes, you can cancel up to 2 hours before the scheduled time. Cancellation fees may apply for last-minute cancellations.',
+    category: 'Bookings'
+  },
+  {
+    id: '5',
+    question: 'How do I become a helper?',
+    answer: 'Tap "Become a Helper" in your profile, complete the registration process, upload required documents, and pass our verification.',
+    category: 'Becoming a Helper'
+  }
+];
+
 export default function Landing() {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
@@ -224,7 +268,7 @@ export default function Landing() {
     );
 
     // Observe all main sections
-    const sections = ['home', 'how-it-works', 'pricing', 'testimonials', 'download-app', 'contact'];
+    const sections = ['home', 'how-it-works', 'pricing', 'testimonials', 'faq', 'app-download', 'contact'];
     sections.forEach(sectionId => {
       const element = document.getElementById(sectionId);
       if (element) observer.observe(element);
@@ -263,7 +307,7 @@ export default function Landing() {
     if (!showOTPField) {
       // Track form step 1 - phone submission
       trackFormSubmission('beta_signup_step1');
-      trackButtonClick('send_otp', 'download-app');
+      trackButtonClick('send_otp', 'app-download');
       
       // First step: send OTP
       setIsSubmitting(true);
@@ -279,7 +323,7 @@ export default function Landing() {
     } else {
       // Track form completion
       trackFormSubmission('beta_signup_complete', 100);
-      trackButtonClick('verify_complete_signup', 'download-app');
+      trackButtonClick('verify_complete_signup', 'app-download');
       
       // Second step: verify OTP and submit
       setIsSubmitting(true);
@@ -340,13 +384,13 @@ export default function Landing() {
           {/* Key Features */}
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <Badge variant="secondary" className="bg-white text-slate-700 px-4 py-2 text-sm">
-              ✅ Full-time | Part-time | One-time
+              🕒 Full-time | Part-time | One-time
             </Badge>
             <Badge variant="secondary" className="bg-white text-slate-700 px-4 py-2 text-sm">
-              ✅ Verified profiles | No commissions
+              🛡️ Verified profiles | ₹ No commissions
             </Badge>
             <Badge variant="secondary" className="bg-white text-slate-700 px-4 py-2 text-sm">
-              ✅ Multilingual AI
+              🌐 Multilingual AI
             </Badge>
           </div>
 
@@ -442,7 +486,7 @@ export default function Landing() {
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
-                  <DollarSign className="h-8 w-8 text-green-600 mr-3" />
+                  <IndianRupee className="h-8 w-8 text-green-600 mr-3" />
                   <h3 className="text-lg font-semibold">No Commissions</h3>
                 </div>
                 <p className="text-slate-600">Pay helpers directly. They keep 100% of their earnings</p>
@@ -576,7 +620,7 @@ export default function Landing() {
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
-                    <span>💸 You pay the helper directly — no salary cuts or commissions</span>
+                    <span>₹ You pay the helper directly — no salary cuts or commissions</span>
                   </div>
                   <div className="flex items-center">
                     <CheckCircle className="h-5 w-5 text-green-500 mr-3" />
@@ -696,8 +740,30 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Download App */}
-      <section id="download-app" className="py-20 px-4 bg-gradient-to-br from-orange-50 to-amber-50">
+      {/* FAQ Section */}
+      <section id="faq" className="py-20 px-4 bg-orange-50">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-12 text-center">
+            Frequently Asked Questions
+          </h2>
+
+          <Accordion type="single" collapsible className="space-y-4">
+            {faqData.map((faq) => (
+              <AccordionItem key={faq.id} value={faq.id} className="bg-white rounded-xl shadow-md border border-slate-200">
+                <AccordionTrigger className="px-6">
+                  <span className="text-left text-base font-medium text-slate-800">{faq.question}</span>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 text-slate-700">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      {/* App Download Section */}
+      <section id="app-download" className="py-20 px-4 bg-gradient-to-br from-orange-50 to-amber-50">
         <div className="max-w-4xl mx-auto text-center">
           <div className="mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
@@ -754,29 +820,6 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* App Download Section */}
-      <section id="app-download" className="py-12 px-4 bg-slate-900 text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-lg font-bold mb-6">Download SevakAI App</h3>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              onClick={() => handleAppDownload('iOS')}
-              className="bg-black hover:bg-gray-800 text-white px-8 py-4 rounded-xl flex items-center"
-            >
-              <Download className="mr-2 h-5 w-5" />
-              Download for iOS
-            </Button>
-            <Button 
-              onClick={() => handleAppDownload('Android')}
-              className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl flex items-center"
-            >
-              <Download className="mr-2 h-5 w-5" />
-              Download for Android
-            </Button>
-          </div>
-        </div>
-      </section>
-
       {/* Contact */}
       <section id="contact" className="py-20 px-4 bg-white">
         <div className="max-w-4xl mx-auto text-center">
@@ -824,7 +867,7 @@ export default function Landing() {
       {/* Sticky CTA on Mobile */}
       <div className="fixed bottom-20 left-4 right-4 md:hidden z-40">
         <Button 
-          onClick={() => scrollToSection('download-app')}
+          onClick={() => scrollToSection('app-download')}
           className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-xl shadow-2xl"
         >
           Download App - Get Started

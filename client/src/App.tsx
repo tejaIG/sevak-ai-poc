@@ -8,6 +8,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { supabase } from "./lib/supabase";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
+import { SevakChatbot } from "@/components/sevak-chatbot";
 import Landing from "@/pages/landing";
 import Registration from "@/pages/registration";
 import Requirements from "@/pages/requirements";
@@ -95,6 +96,7 @@ function Router() {
         <Route component={NotFound} />
       </Switch>
       <Footer />
+      <SevakChatbot />
     </div>
   );
 }
