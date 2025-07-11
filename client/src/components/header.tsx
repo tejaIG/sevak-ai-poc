@@ -58,7 +58,7 @@ export function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center">
+          <div className="flex items-start">
             <button
               onClick={() => scrollToSection('home')}
               className="flex items-center space-x-3"
@@ -69,7 +69,7 @@ export function Header() {
                 className="w-8 h-8 rounded-lg object-contain"
                 style={{ width: '32px', height: '32px', objectFit: 'contain' }}
               />
-              <div>
+              <div className="text-left">
                 <h1 className="text-xl font-bold text-slate-900">SevakAI</h1>
                 <p className="text-xs text-slate-500">AI-Powered Help Hiring</p>
               </div>

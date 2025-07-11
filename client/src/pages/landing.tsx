@@ -36,6 +36,7 @@ import {
   initScrollTracking,
   trackSectionView
 } from "@/lib/analytics";
+import { Analytics } from "@vercel/analytics/react"
 
 // Mock data for Featured Sevaks
 const featuredSevaks = [
