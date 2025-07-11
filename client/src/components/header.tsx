@@ -112,7 +112,7 @@ export function Header() {
               onClick={() => scrollToSection('contact')}
               className="text-slate-700 hover:text-orange-600 font-medium transition-colors"
             >
-              Contact
+              Contact Us
             </button>
             
             {/* CTA Button */}
@@ -174,15 +174,15 @@ export function Header() {
                 onClick={() => scrollToSection('contact')}
                 className="block w-full text-left px-3 py-2 text-slate-700 hover:bg-slate-50 rounded-lg"
               >
-                Contact
+                Contact Us
               </button>
               
               <div className="px-3 pt-2">
                 <Button
-                  onClick={() => scrollToSection('join-beta')}
+                  onClick={() => scrollToSection('download-app')}
                   className="w-full bg-orange-500 hover:bg-orange-600 text-white"
                 >
-                  Join Beta
+                  Download App
                 </Button>
               </div>
             </div>

@@ -92,10 +92,10 @@ export function Footer() {
               </li>
               <li>
                 <button 
-                  onClick={() => scrollToSection('join-beta')}
+                  onClick={() => scrollToSection('download-app')}
                   className="text-slate-300 hover:text-white transition-colors text-left"
                 >
-                  Join Beta
+                  Download App
                 </button>
               </li>
             </ul>

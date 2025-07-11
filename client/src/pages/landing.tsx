@@ -224,7 +224,7 @@ export default function Landing() {
     );
 
     // Observe all main sections
-    const sections = ['home', 'how-it-works', 'pricing', 'testimonials', 'join-beta', 'contact'];
+    const sections = ['home', 'how-it-works', 'pricing', 'testimonials', 'download-app', 'contact'];
     sections.forEach(sectionId => {
       const element = document.getElementById(sectionId);
       if (element) observer.observe(element);
@@ -263,7 +263,7 @@ export default function Landing() {
     if (!showOTPField) {
       // Track form step 1 - phone submission
       trackFormSubmission('beta_signup_step1');
-      trackButtonClick('send_otp', 'join-beta');
+      trackButtonClick('send_otp', 'download-app');
       
       // First step: send OTP
       setIsSubmitting(true);
@@ -279,7 +279,7 @@ export default function Landing() {
     } else {
       // Track form completion
       trackFormSubmission('beta_signup_complete', 100);
-      trackButtonClick('verify_complete_signup', 'join-beta');
+      trackButtonClick('verify_complete_signup', 'download-app');
       
       // Second step: verify OTP and submit
       setIsSubmitting(true);
@@ -332,7 +332,7 @@ export default function Landing() {
               Hire Trusted Maids, Cooks, Drivers & Nannies. 
               <span className="text-orange-600"> Without the Guesswork.</span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-700 mb-8 max-w-4xl mx-auto">
+            <p className="text-base text-slate-700 mb-8 max-w-4xl mx-auto">
               Say goodbye to random referrals. SevakAI connects you with verified, voice-onboarded helpers — using AI, not WhatsApp groups.
             </p>
           </div>
@@ -350,17 +350,39 @@ export default function Landing() {
             </Badge>
           </div>
 
-          {/* CTA Button */}
-          <Button 
-            onClick={() => scrollToSection('join-beta')}
-            className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-4 text-lg rounded-xl shadow-lg mb-8"
-          >
-            Join the Beta
-            <ChevronRight className="ml-2 h-5 w-5" />
-          </Button>
+          {/* Download App Section */}
+          <div className="mb-8">
+            <h3 className="text-lg font-semibold text-slate-800 mb-4 text-center">Download Our App</h3>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <a 
+                href="#" 
+                className="inline-flex items-center bg-black text-white px-6 py-3 rounded-xl shadow-lg hover:bg-gray-800 transition-colors"
+              >
+                <svg className="w-8 h-8 mr-3" viewBox="0 0 24 24" fill="white">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+                </svg>
+                <div className="text-left">
+                  <div className="text-xs">Download on the</div>
+                  <div className="text-base font-semibold">App Store</div>
+                </div>
+              </a>
+              <a 
+                href="#" 
+                className="inline-flex items-center bg-black text-white px-6 py-3 rounded-xl shadow-lg hover:bg-gray-800 transition-colors"
+              >
+                <svg className="w-8 h-8 mr-3" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.92 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+                </svg>
+                <div className="text-left">
+                  <div className="text-xs">Get it on</div>
+                  <div className="text-base font-semibold">Google Play</div>
+                </div>
+              </a>
+            </div>
+          </div>
 
           {/* Location Badge */}
-          <div className="inline-flex items-center bg-green-100 text-green-800 px-6 py-3 rounded-full text-lg font-medium">
+          <div className="inline-flex items-center bg-green-100 text-green-800 px-6 py-3 rounded-full text-base font-medium">
             <div className="w-3 h-3 bg-green-500 rounded-full mr-3 animate-pulse"></div>
             🟢 Now in Hyderabad. Expanding to Bengaluru, Chennai, and Dubai.
           </div>
@@ -381,7 +403,7 @@ export default function Landing() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   <Zap className="h-8 w-8 text-blue-600 mr-3" />
-                  <h3 className="text-xl font-semibold">AI-Matched Helpers</h3>
+                  <h3 className="text-lg font-semibold">AI-Matched Helpers</h3>
                 </div>
                 <p className="text-slate-600">Find the right fit by skills, language & availability</p>
               </CardContent>
@@ -391,7 +413,7 @@ export default function Landing() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   <Mic className="h-8 w-8 text-green-600 mr-3" />
-                  <h3 className="text-xl font-semibold">Voice Onboarding</h3>
+                  <h3 className="text-lg font-semibold">Voice Onboarding</h3>
                 </div>
                 <p className="text-slate-600">Helpers reply in their native language (100+ supported)</p>
               </CardContent>
@@ -401,7 +423,7 @@ export default function Landing() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   <Shield className="h-8 w-8 text-purple-600 mr-3" />
-                  <h3 className="text-xl font-semibold">Background Verified</h3>
+                  <h3 className="text-lg font-semibold">Background Verified</h3>
                 </div>
                 <p className="text-slate-600">ID checks, face scans, and experience verified</p>
               </CardContent>
@@ -411,7 +433,7 @@ export default function Landing() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   <Phone className="h-8 w-8 text-red-600 mr-3" />
-                  <h3 className="text-xl font-semibold">Interview Options</h3>
+                  <h3 className="text-lg font-semibold">Interview Options</h3>
                 </div>
                 <p className="text-slate-600">You or we can pre-screen shortlisted helpers</p>
               </CardContent>
@@ -421,7 +443,7 @@ export default function Landing() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   <DollarSign className="h-8 w-8 text-green-600 mr-3" />
-                  <h3 className="text-xl font-semibold">No Commissions</h3>
+                  <h3 className="text-lg font-semibold">No Commissions</h3>
                 </div>
                 <p className="text-slate-600">Pay helpers directly. They keep 100% of their earnings</p>
               </CardContent>
@@ -431,7 +453,7 @@ export default function Landing() {
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
                   <Award className="h-8 w-8 text-orange-600 mr-3" />
-                  <h3 className="text-xl font-semibold">30-Day Match Guarantee</h3>
+                  <h3 className="text-lg font-semibold">30-Day Match Guarantee</h3>
                 </div>
                 <p className="text-slate-600">No match? Full refund.</p>
               </CardContent>
@@ -454,9 +476,9 @@ export default function Landing() {
               <div className="md:w-1/2">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">1</div>
-                  <h3 className="text-2xl font-semibold">Tell us what you need</h3>
+                  <h3 className="text-lg font-semibold">Tell us what you need</h3>
                 </div>
-                <p className="text-slate-600 text-lg">via voice or quick form</p>
+                <p className="text-slate-600">via voice or quick form</p>
                 <div className="bg-orange-50 p-4 rounded-lg mt-4">
                   <p className="text-orange-800 italic">"Need a Hindi-speaking cook for 6–9 PM near Gachibowli"</p>
                 </div>
@@ -472,9 +494,9 @@ export default function Landing() {
               <div className="md:w-1/2">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">2</div>
-                  <h3 className="text-2xl font-semibold">Get matched by our AI</h3>
+                  <h3 className="text-lg font-semibold">Get matched by our AI</h3>
                 </div>
-                <p className="text-slate-600 text-lg">Top 3 verified helpers based on your needs</p>
+                <p className="text-slate-600">Top 3 verified helpers based on your needs</p>
               </div>
               <div className="md:w-1/2">
                 <div className="bg-white p-6 rounded-xl shadow-lg">
@@ -487,9 +509,9 @@ export default function Landing() {
               <div className="md:w-1/2">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">3</div>
-                  <h3 className="text-2xl font-semibold">View profiles & hear voice answers</h3>
+                  <h3 className="text-lg font-semibold">View profiles & hear voice answers</h3>
                 </div>
-                <p className="text-slate-600 text-lg">Audio/video interviews + skill tags + availability</p>
+                <p className="text-slate-600">Audio/video interviews + skill tags + availability</p>
               </div>
               <div className="md:w-1/2">
                 <div className="bg-white p-6 rounded-xl shadow-lg">
@@ -502,7 +524,7 @@ export default function Landing() {
               <div className="md:w-1/2">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">4</div>
-                  <h3 className="text-2xl font-semibold">Choose how to interview</h3>
+                  <h3 className="text-lg font-semibold">Choose how to interview</h3>
                 </div>
                 <div className="space-y-2">
                   <p className="text-slate-600">→ Option 1: Schedule a video call</p>
@@ -520,9 +542,9 @@ export default function Landing() {
               <div className="md:w-1/2">
                 <div className="flex items-center mb-4">
                   <div className="w-10 h-10 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-lg mr-4">5</div>
-                  <h3 className="text-2xl font-semibold">Hire directly. Pay directly.</h3>
+                  <h3 className="text-lg font-semibold">Hire directly. Pay directly.</h3>
                 </div>
-                <p className="text-slate-600 text-lg">You discuss salary with helper and pay them fully</p>
+                <p className="text-slate-600">You discuss salary with helper and pay them fully</p>
               </div>
               <div className="md:w-1/2">
                 <div className="bg-white p-6 rounded-xl shadow-lg">
@@ -544,7 +566,7 @@ export default function Landing() {
           <div className="grid md:grid-cols-2 gap-8 mt-12">
             <Card className="border-2 border-orange-200 shadow-xl">
               <CardHeader className="bg-orange-50">
-                <CardTitle className="text-2xl text-orange-700">Basic Access</CardTitle>
+                <CardTitle className="text-lg text-orange-700">Basic Access</CardTitle>
               </CardHeader>
               <CardContent className="p-8">
                 <div className="space-y-4">
@@ -566,7 +588,7 @@ export default function Landing() {
 
             <Card className="border-2 border-blue-200 shadow-xl">
               <CardHeader className="bg-blue-50">
-                <CardTitle className="text-2xl text-blue-700">Premium Screening</CardTitle>
+                <CardTitle className="text-lg text-blue-700">Premium Screening</CardTitle>
               </CardHeader>
               <CardContent className="p-8">
                 <div className="space-y-4">
@@ -588,7 +610,7 @@ export default function Landing() {
           </div>
 
           <div className="mt-12">
-            <p className="text-xl text-slate-700 font-medium">
+            <p className="text-base text-slate-700 font-medium">
               Built for fairness. Powered by AI. Trusted by families.
             </p>
           </div>
@@ -674,129 +696,68 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Join Beta */}
-      <section id="join-beta" className="py-20 px-4 bg-gradient-to-br from-orange-50 to-amber-50">
-        <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
+      {/* Download App */}
+      <section id="download-app" className="py-20 px-4 bg-gradient-to-br from-orange-50 to-amber-50">
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">
-              We're in Beta – Get Early Access Now
+              Download Our App
             </h2>
+            <p className="text-base text-slate-600 mb-8">
+              Get started today and connect with verified domestic helpers in your area
+            </p>
           </div>
 
-          <Card className="border-none shadow-2xl">
-            <CardContent className="p-8">
-              <form onSubmit={handleFormSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <Label htmlFor="phone" className="text-lg font-medium">📱 Phone Number *</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="+91 98765 43210"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      required
-                      className="mt-2"
-                    />
-                  </div>
-                  
-                  <div>
-                    <Label htmlFor="name" className="text-lg font-medium">👤 Full Name *</Label>
-                    <Input
-                      id="name"
-                      type="text"
-                      placeholder="Your full name"
-                      value={formData.name}
-                      onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      required
-                      className="mt-2"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="address" className="text-lg font-medium">🏠 Address (area & city) *</Label>
-                  <Textarea
-                    id="address"
-                    placeholder="e.g., Gachibowli, Hyderabad"
-                    value={formData.address}
-                    onChange={(e) => setFormData({...formData, address: e.target.value})}
-                    required
-                    className="mt-2"
-                  />
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <Label htmlFor="helpType" className="text-lg font-medium">🔽 Type of Help Needed *</Label>
-                    <Select value={formData.helpType} onValueChange={(value) => setFormData({...formData, helpType: value})}>
-                      <SelectTrigger className="mt-2">
-                        <SelectValue placeholder="Select type of help" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {helpTypes.map((type) => (
-                          <SelectItem key={type} value={type}>{type}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <Label htmlFor="language" className="text-lg font-medium">🌐 Preferred Language (optional)</Label>
-                    <Select value={formData.language} onValueChange={(value) => setFormData({...formData, language: value})}>
-                      <SelectTrigger className="mt-2">
-                        <SelectValue placeholder="Select preferred language" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {languages.map((lang) => (
-                          <SelectItem key={lang} value={lang}>{lang}</SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                {showOTPField && (
-                  <div>
-                    <Label htmlFor="otp" className="text-lg font-medium">🔐 Enter OTP</Label>
-                    <Input
-                      id="otp"
-                      type="text"
-                      placeholder="Enter 6-digit OTP"
-                      value={otp}
-                      onChange={(e) => setOtp(e.target.value)}
-                      maxLength={6}
-                      className="mt-2"
-                    />
-                  </div>
-                )}
-
-                <Button 
-                  type="submit"
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 text-lg rounded-xl"
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? "Processing..." : showOTPField ? "Verify & Create Profile" : "Submit & Create Profile"}
-                </Button>
-              </form>
-
-              <div className="mt-8 text-center">
-                <p className="text-slate-600 mb-4">
-                  ✅ After signup, you'll receive a link to download the SevakAI app on iOS or Play Store to complete your hiring journey.
-                </p>
-                <p className="text-sm text-slate-500">
-                  Built for mobile. Backed by real people. Powered by our AI.
-                </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+            <a 
+              href="#" 
+              className="inline-flex items-center bg-black text-white px-8 py-4 rounded-2xl shadow-xl hover:bg-gray-800 transition-all duration-300 transform hover:scale-105"
+            >
+              <svg className="w-12 h-12 mr-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              <div className="text-left">
+                <div className="text-sm">Download on the</div>
+                <div className="text-base font-bold">App Store</div>
               </div>
-            </CardContent>
-          </Card>
+            </a>
+            <a 
+              href="#" 
+              className="inline-flex items-center bg-black text-white px-8 py-4 rounded-2xl shadow-xl hover:bg-gray-800 transition-all duration-300 transform hover:scale-105"
+            >
+              <svg className="w-12 h-12 mr-4" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.92 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/>
+              </svg>
+              <div className="text-left">
+                <div className="text-sm">Get it on</div>
+                <div className="text-base font-bold">Google Play</div>
+              </div>
+            </a>
+          </div>
+
+          <div className="bg-white p-8 rounded-3xl shadow-xl max-w-2xl mx-auto">
+            <h3 className="text-lg font-bold text-slate-900 mb-4">Coming Soon!</h3>
+            <p className="text-base text-slate-600 mb-6">
+              Our mobile app is currently in development. Sign up below to be notified when it's available.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <input 
+                type="email" 
+                placeholder="Enter your email address"
+                className="flex-1 px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              />
+              <button className="bg-orange-500 hover:bg-orange-600 text-white px-8 py-3 rounded-xl font-semibold transition-colors">
+                Notify Me
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* App Download Section */}
       <section id="app-download" className="py-12 px-4 bg-slate-900 text-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h3 className="text-2xl font-bold mb-6">Download SevakAI App</h3>
+          <h3 className="text-lg font-bold mb-6">Download SevakAI App</h3>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               onClick={() => handleAppDownload('iOS')}
@@ -827,7 +788,7 @@ export default function Landing() {
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow cursor-pointer" onClick={openWhatsApp}>
               <CardContent className="p-8 text-center">
                 <MessageCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">💬 Chat on WhatsApp</h3>
+                <h3 className="text-lg font-semibold mb-2">💬 Chat on WhatsApp</h3>
                 <p className="text-slate-600">Our AI Agent is available 24x7</p>
               </CardContent>
             </Card>
@@ -835,7 +796,7 @@ export default function Landing() {
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
               <CardContent className="p-8 text-center">
                 <Phone className="h-16 w-16 text-blue-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">📞 Call Us</h3>
+                <h3 className="text-lg font-semibold mb-2">📞 Call Us</h3>
                 <button 
                   onClick={() => {
                     trackButtonClick('call_phone', 'contact');
@@ -851,7 +812,7 @@ export default function Landing() {
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
               <CardContent className="p-8 text-center">
                 <MapPin className="h-16 w-16 text-purple-500 mx-auto mb-4" />
-                <h3 className="text-xl font-semibold mb-2">📍 Office</h3>
+                <h3 className="text-lg font-semibold mb-2">📍 Office</h3>
                 <p className="text-slate-600">Hyderabad, India</p>
                 <p className="text-slate-500 text-sm mt-2">(Dubai & Chennai Coming Soon)</p>
               </CardContent>
@@ -863,10 +824,10 @@ export default function Landing() {
       {/* Sticky CTA on Mobile */}
       <div className="fixed bottom-20 left-4 right-4 md:hidden z-40">
         <Button 
-          onClick={() => scrollToSection('join-beta')}
+          onClick={() => scrollToSection('download-app')}
           className="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-xl shadow-2xl"
         >
-          Join Beta - Get Started
+          Download App - Get Started
         </Button>
       </div>
     </div>
